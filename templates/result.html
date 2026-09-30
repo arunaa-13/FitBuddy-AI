@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FitBuddy AI - Your Plan</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7f6;
+            color: #222;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 40px auto;
+        }
+
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.07);
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        .user-info {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.07);
+        }
+
+        h2 {
+            margin-bottom: 18px;
+        }
+
+        .plan {
+            white-space: pre-wrap;
+            line-height: 1.7;
+            background: #f8f9f9;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .tip {
+            line-height: 1.7;
+            background: #eef8f0;
+            padding: 20px;
+            border-radius: 12px;
+            white-space: pre-wrap;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 14px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            resize: vertical;
+            font-family: Arial, sans-serif;
+            font-size: 15px;
+        }
+
+        button {
+            margin-top: 12px;
+            padding: 13px 22px;
+            border: none;
+            border-radius: 10px;
+            background: #222;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #444;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 10px;
+            color: #222;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .notice {
+            padding: 15px;
+            background: #fff5d6;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>FitBuddy AI 🏋️</h1>
+
+        <p class="user-info">
+            Hello, <strong>{{ username }}</strong>!<br>
+
+            User ID:
+            <strong>{{ user_id }}</strong><br>
+
+            Age:
+            <strong>{{ age }}</strong>
+            &nbsp; | &nbsp;
+
+            Weight:
+            <strong>{{ weight }}</strong> kg<br>
+
+            Goal:
+            <strong>{{ goal }}</strong>
+            &nbsp; | &nbsp;
+
+            Intensity:
+            <strong>{{ intensity }}</strong>
+        </p>
+    </div>
+
+
+    {% if feedback_submitted %}
+    <div class="notice">
+        ✅ Your workout plan has been updated based on your feedback.
+    </div>
+    {% endif %}
+
+
+    <div class="card">
+
+        <h2>🏋️ Your AI Workout Plan</h2>
+
+        <div class="plan">{{ workout_plan }}</div>
+
+    </div>
+
+
+    {% if nutrition_tip %}
+
+    <div class="card">
+
+        <h2>🥗 AI Nutrition & Recovery Tip</h2>
+
+        <div class="tip">{{ nutrition_tip }}</div>
+
+    </div>
+
+    {% endif %}
+
+
+    <div class="card">
+
+        <h2>💬 Improve Your Plan</h2>
+
+        <p style="margin-bottom: 15px;">
+            Tell FitBuddy what you would like to change.
+        </p>
+
+        <form action="/submit-feedback" method="post">
+
+            <input
+                type="hidden"
+                name="user_id"
+                value="{{ user_id }}"
+            >
+
+            <textarea
+                name="feedback"
+                placeholder="Example: Make the workout easier and include more home exercises."
+                required
+            ></textarea>
+
+            <button type="submit">
+                Update My Plan
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <a class="back" href="/">
+        ← Generate another plan
+    </a>
+
+</div>
+
+</body>
+</html>
